@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>
+    Delete
+</button>
+
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        font-size: 15px;
+    }
+    button {
+        display: inline-block;
+        font-size: 3rem;
+        background-color: #fecaca;
+        color: #dc2626;
+        border: 2px solid #fca5a5;
+        border-radius: .5rem;
+        padding: .8rem 2rem;
+    }
+    button:hover {
+        border-color: #ef4444;
+        cursor: pointer;
+    }
+    button:active {
+        border-color: #000;
+        background-image: linear-gradient(to right, #fca5a5 0%, #fca5a5 50%, #fecaca 50%, #fecaca 100%);
+        background-size: 200% 100%;
+        background-position: 100%; /* 100% -> 0% */
+        animation: 1s confirmation ease-out forwards;
+    }
+    @keyframes confirmation {
+        from {
+            background-position: 100%;
+        }
+        to {
+            background-position: 0%;
+        }
+    }
+</style>
+<script>
+    const button = document.querySelector('button')
+    const timeout = 1000
+    let deleteTimer
+    let isHoldingDeleteButton
+
+    button.addEventListener('mousedown', e => {
+        isHoldingDeleteButton = true
+        deleteTimer = setTimeout(() => {
+            button.innerText = 'Deleted'
+        }, timeout)
+    })
+
+    window.addEventListener('mouseup', e => {
+        if (isHoldingDeleteButton) {
+            if (deleteTimer) {
+                clearTimeout(deleteTimer)
+            }
+            button.innerText = 'Delete'
+        }
+    })
+</script>
+</body>
+</html>
+
+<!--https://www.bilibili.com/video/BV1mj411N76D/?spm_id_from=333.999.0.0&vd_source=19e86aa7a174f30e2dca08b6b36b6edf-->
